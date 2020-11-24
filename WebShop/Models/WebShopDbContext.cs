@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebShop
 {
-    public partial class postgresContext : DbContext
+    public partial class WebShopDbContext : DbContext
     {
-        public postgresContext()
+        public WebShopDbContext()
         {
         }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
+        public WebShopDbContext(DbContextOptions<WebShopDbContext> options)
             : base(options)
         {
         }
@@ -29,7 +29,7 @@ namespace WebShop
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=Antonio;Password=pass;");
             }
         }
