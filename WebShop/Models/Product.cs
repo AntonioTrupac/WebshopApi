@@ -3,12 +3,9 @@ using System.Collections.Generic;
 
 namespace WebShop.Models
 {
-    public partial class Product
+    public class Product
     {
-        public Product()
-        {
-            OrderItem = new HashSet<OrderItem>();
-        }
+        
 
         public int ProductId { get; set; }
         public int ProductTypeId { get; set; }
@@ -17,8 +14,6 @@ namespace WebShop.Models
         public string Size { get; set; }
         public int Stock { get; set; }
         public string Description { get; set; }
-
-        public virtual ProductType ProductType { get; set; }
-        public virtual ICollection<OrderItem> OrderItem { get; set; }
+        
     }
 }
