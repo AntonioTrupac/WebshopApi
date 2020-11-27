@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Infrastructure.Models;
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +29,7 @@ namespace WebShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<postgresContext>(options =>
+            services.AddDbContext<ChristmasDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("postgres")));
         }
 

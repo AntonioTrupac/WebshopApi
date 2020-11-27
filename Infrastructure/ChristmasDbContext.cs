@@ -3,15 +3,15 @@ using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Infrastructure.Models
+namespace Infrastructure
 {
-    public partial class postgresContext : DbContext
+    public partial class ChristmasDbContext : DbContext
     {
-        public postgresContext()
+        public ChristmasDbContext()
         {
         }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
+        public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options)
             : base(options)
         {
         }
@@ -27,7 +27,12 @@ namespace Infrastructure.Models
                 optionsBuilder.UseNpgsql("Name=postgres");
             }
         }
-
+        
+        partial void OnModelCreatingPartial(ModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Product>().HasNoKey();
+        }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>(entity =>
@@ -64,15 +69,7 @@ namespace Infrastructure.Models
 
                
             });
-
             
-
-            
-
-            
-
-            
-
             OnModelCreatingPartial(modelBuilder);
         }
 

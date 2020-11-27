@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
-using Infrastructure.Models;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +15,9 @@ namespace WebShop.Controllers
     
     public class ProductController: ControllerBase
     {
-        private readonly postgresContext _context;
+        private readonly ChristmasDbContext _context;
 
-        public ProductController(postgresContext context)
+        public ProductController(ChristmasDbContext context)
         {
             _context = context;
         }
