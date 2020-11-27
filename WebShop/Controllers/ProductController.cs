@@ -19,8 +19,9 @@ namespace WebShop.Controllers
         {
             _context = context;
         }
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {    
             var products = await _context.Product.ToListAsync();
             return Ok(products);
@@ -29,7 +30,7 @@ namespace WebShop.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductsById(int id)
         {
-            var product = await _context.Product.FirstOrDefaultAsync(prod => prod.ProductId == id);
+            var product = await _context.Product.FindAsync(id);
             return Ok(product);
         }
     }
