@@ -1,8 +1,9 @@
 ﻿using System;
+using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace WebShop.Models
+namespace Infrastructure.Models
 {
     public partial class postgresContext : DbContext
     {
