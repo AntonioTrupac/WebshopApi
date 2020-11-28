@@ -17,8 +17,8 @@ namespace Infrastructure
         }
 
         
-        public DbSet<Product> Product { get; set; }
-        
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,12 +27,7 @@ namespace Infrastructure
                 optionsBuilder.UseNpgsql("Name=postgres");
             }
         }
-        
-        partial void OnModelCreatingPartial(ModelBuilder modelbuilder)
-        {
-            modelbuilder.Entity<Product>().HasNoKey();
-        }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>(entity =>
@@ -66,13 +61,28 @@ namespace Infrastructure
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Stock).HasColumnName("stock");
-
-               
+                
+                entity.HasOne(d => d.ProductType)
+                    .WithMany(p => p.Product)
+                    .HasForeignKey(d => d.ProductTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_product_type");
             });
             
-            OnModelCreatingPartial(modelBuilder);
-        }
+            modelBuilder.Entity<ProductType>(entity =>
+            {
+                entity.ToTable("product_type");
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+                entity.Property(e => e.ProductTypeId)
+                    .HasColumnName("product_type_id")
+                    .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(255);
+            });
+            
+        }
+        
     }
 }
