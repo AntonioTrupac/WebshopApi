@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,9 @@ namespace WebShop
             services.AddControllers();
             services.AddDbContext<ChristmasDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("postgres")));
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

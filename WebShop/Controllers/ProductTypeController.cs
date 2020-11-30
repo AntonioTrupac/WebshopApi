@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,17 +12,17 @@ namespace WebShop.Controllers
     
     public class ProductTypeController : ControllerBase 
     {
-        private readonly ChristmasDbContext _dbContext;
+        private readonly IProductTypeRepository _repo;
 
-        public ProductTypeController(ChristmasDbContext dbContext) 
+        public ProductTypeController(IProductTypeRepository repo) 
         {
-            _dbContext = dbContext;
+            _repo = repo;
         } 
         
         //get all 
         [HttpGet]
-        public async Task<ActionResult<List<ProductType>>> GetProductTypes() {
-            var productType = await _dbContext.ProductTypes.ToListAsync();
+        public async Task<ActionResult<List<ProductType>>> GetAllProductTypes() {
+            var productType = await _repo.GetAllProductTypes();
             if (productType == null) {
                 return NotFound();
             }
@@ -31,7 +32,7 @@ namespace WebShop.Controllers
         //get by id
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductType>> GetProductById(int id) {
-            var productTypeId = await _dbContext.ProductTypes.FindAsync(id);
+            var productTypeId = await _repo.GetProductTypeById(id);
             if (productTypeId == null) {
                 return NotFound();
             }

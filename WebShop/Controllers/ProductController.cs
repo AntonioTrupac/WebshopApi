@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Core.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -16,18 +17,17 @@ namespace WebShop.Controllers
     
     public class ProductController: ControllerBase
     {
-        private readonly ChristmasDbContext _context;
+        private readonly IProductRepository _repo;
 
-        public ProductController(ChristmasDbContext context)
+        public ProductController(IProductRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
         
         //get all
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
-        {    
-            var products = await _context.Products.ToListAsync();
+        public async Task<ActionResult<List<Product>>> GetProducts() {
+            var products = await _repo.GetProductsAsync();
             if (products == null) {
                 return NotFound();
             }
@@ -38,7 +38,8 @@ namespace WebShop.Controllers
         //get by id
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductsById(int id) {
-           var product = await _context.Products.FindAsync(id);
+            
+            var product = await _repo.GetProductByIdAsync(id);
            if (product == null) {
                return NotFound();
            }
