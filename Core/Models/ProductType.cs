@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Core.Models;
 
 namespace Infrastructure
-{
-    public  class ProductType
+{    
+    [Table("product_type")]
+    public class ProductType 
     {
-        public ProductType()
-        {
-            Product = new HashSet<Product>();
-        }
-        [Key]
-        public int ProductTypeId { get; set; }
-        public string Name { get; set; }
+       [Key]
+       [Column("Product_Type_Id")]
+       public int Product_Type_Id { get; set; }
+       [Column("Name")]
+       public string Name { get; set; }
 
-        public ICollection<Product> Product { get; set; }
+        
     }
 }
