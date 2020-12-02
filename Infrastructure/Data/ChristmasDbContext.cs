@@ -15,6 +15,9 @@ namespace Infrastructure
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set;}
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
         
 }

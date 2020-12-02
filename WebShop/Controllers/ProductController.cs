@@ -7,7 +7,7 @@ using Core.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 
 
 namespace WebShop.Controllers
@@ -18,17 +18,20 @@ namespace WebShop.Controllers
     public class ProductController: ControllerBase
     {
         private readonly IProductRepository _repo;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductRepository repo)
-        {
+        public ProductController(IProductRepository repo, ILogger<ProductController> logger) {
             _repo = repo;
+            _logger = logger;
         }
         
         //get all
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() {
             var products = await _repo.GetProductsAsync();
+            
             if (products == null) {
+                
                 return NotFound();
             }
             
@@ -38,7 +41,7 @@ namespace WebShop.Controllers
         //get by id
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductsById(int id) {
-            
+            _logger.Log(LogLevel.Information, "{id}" + " " + id.ToString());
             var product = await _repo.GetProductByIdAsync(id);
            if (product == null) {
                return NotFound();
@@ -46,5 +49,10 @@ namespace WebShop.Controllers
            
            return Ok(product);
         }
+
+        /*[HttpPost]
+        public async Task<IActionResult<Product>> CreateProduct(Product product) {
+            
+        }*/
     }
 }

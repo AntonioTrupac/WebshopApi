@@ -4,6 +4,7 @@ using Core.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace WebShop.Controllers 
 {
@@ -13,10 +14,12 @@ namespace WebShop.Controllers
     public class ProductTypeController : ControllerBase 
     {
         private readonly IProductTypeRepository _repo;
+        private readonly ILogger<ProductTypeController> _logger;
 
-        public ProductTypeController(IProductTypeRepository repo) 
+        public ProductTypeController(IProductTypeRepository repo, ILogger<ProductTypeController> logger) 
         {
             _repo = repo;
+            _logger = logger;
         } 
         
         //get all 
@@ -32,6 +35,7 @@ namespace WebShop.Controllers
         //get by id
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductType>> GetProductById(int id) {
+            _logger.Log(LogLevel.Information, "{id}" + " " + id.ToString());
             var productTypeId = await _repo.GetProductTypeById(id);
             if (productTypeId == null) {
                 return NotFound();
