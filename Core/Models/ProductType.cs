@@ -7,14 +7,10 @@ using Core.Models;
 namespace Infrastructure
 {    
     [Table("product_type")]
-    public class ProductType 
+    public class ProductType :BaseEntity
     {
-       [Key]
-       [Column("Product_Type_Id")]
-       public int Product_Type_Id { get; set; }
+       
        [Column("Name")]
        public string Name { get; set; }
-
-        
     }
 }

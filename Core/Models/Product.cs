@@ -7,10 +7,8 @@ using Infrastructure;
 namespace Core.Models
 {
     [Table("product")]
-    public class Product {
-        [Key]
-        [Column("Product_Id")]
-        public int Product_Id { get; set; }
+    public class Product : BaseEntity {
+        
         [Column("Name")]
         public string Name { get; set; }
         [Column("Price")]
@@ -21,10 +19,9 @@ namespace Core.Models
         public int Stock { get; set; }
         [Column("Description")]
         public string Description { get; set; }
-        /*[Column("ProductType")]
-        public ProductType ProductType { get; set; }*/
         [Column("Product_Type_Id")]
         public int Product_Type_Id { get; set; }
+        
 
     }
 }

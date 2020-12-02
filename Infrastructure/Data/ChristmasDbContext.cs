@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace Infrastructure
 {
     public class ChristmasDbContext : DbContext
-    {
+    {    
+        public ChristmasDbContext(){}
         public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options)
             : base(options)
         {
