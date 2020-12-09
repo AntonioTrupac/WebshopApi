@@ -18,6 +18,7 @@ namespace Infrastructure
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
         }
     }
         

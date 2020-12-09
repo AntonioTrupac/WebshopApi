@@ -8,6 +8,9 @@ namespace Core.Models
 {
     [Table("product")]
     public class Product : BaseEntity {
+        public Product() {
+            ProductType = new ProductType();
+        }
         
         [Column("Name")]
         public string Name { get; set; }
@@ -21,6 +24,8 @@ namespace Core.Models
         public string Description { get; set; }
         [Column("Product_Type_Id")]
         public int Product_Type_Id { get; set; }
+        [ForeignKey("Product_Type_Id")]
+        public virtual ProductType ProductType { get; set; }
         
 
     }

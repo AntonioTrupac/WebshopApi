@@ -9,8 +9,10 @@ namespace Infrastructure
     [Table("product_type")]
     public class ProductType :BaseEntity
     {
-       
+      
        [Column("Name")]
        public string Name { get; set; }
+       
+       
     }
 }
