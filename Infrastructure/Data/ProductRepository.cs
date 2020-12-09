@@ -6,19 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data {
     
-    public class ProductRepository : IProductRepository {
+    public class ProductRepository : GenericRepository<Product>, IProductRepository {
         private readonly ChristmasDbContext _context;
         
-        public ProductRepository(ChristmasDbContext context) {
+        public ProductRepository(ChristmasDbContext context) : base(context) {
             _context = context;
         }
-        public async Task<Product> GetProductByIdAsync(int id) {
-            return await _context.Products.FirstOrDefaultAsync(p=>p.Id == id);
-        }
-
-        public async Task<IReadOnlyList<Product>> GetProductsAsync() {
-            var products = await _context.Products.ToListAsync();
-            return products;
-        }
+        //specific repo methods
     }
 }

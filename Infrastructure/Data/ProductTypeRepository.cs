@@ -1,23 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure {
-    public class ProductTypeRepository : IProductTypeRepository {
+    public class ProductTypeRepository : GenericRepository<ProductType>, IProductTypeRepository {
         
         private readonly ChristmasDbContext _context;
 
-        public ProductTypeRepository(ChristmasDbContext context) {
+        public ProductTypeRepository(ChristmasDbContext context) : base(context) {
             _context = context;
         }
         
-        public async Task<ProductType> GetProductTypeById(int id) {
-            return await _context.ProductTypes.FindAsync(id);
-        }
-
-        public async Task<IReadOnlyList<ProductType>> GetAllProductTypes() {
-            return await _context.ProductTypes.ToListAsync();
-        }
     }
 }

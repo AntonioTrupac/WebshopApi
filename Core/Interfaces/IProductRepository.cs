@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using Core.Models;
 
 namespace Core.Interfaces {
-    public interface IProductRepository {
-        Task<Product> GetProductByIdAsync(int id);
-        Task<IReadOnlyList<Product>> GetProductsAsync();
-        
+    public interface IProductRepository : IGenericRepository<Product> {
+        //specific methods needed
     }
 }

@@ -18,12 +18,10 @@ namespace WebShop.Controllers
     public class ProductController: ControllerBase
     {
         private readonly IProductRepository _repo;
-        private readonly IGenericRepository<Product> _genRepo;
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductRepository repo, IGenericRepository<Product> genRepo, ILogger<ProductController> logger) {
+        public ProductController(IProductRepository repo, ILogger<ProductController> logger) {
             _repo = repo;
-            _genRepo = genRepo;
             _logger = logger;
             
         }
@@ -31,13 +29,12 @@ namespace WebShop.Controllers
         //get all
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() {
-            var products = await _genRepo.GetAll();
+            var products = await _repo.GetAll();
             
             if (products == null) {
                 
                 return NotFound();
             }
-            
             return Ok(products);
         }
         
@@ -45,11 +42,11 @@ namespace WebShop.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductsById(int id) {
             _logger.Log(LogLevel.Information, "{id}" + " " + id);
-            var product = await _genRepo.GetByIdAsync(id);
+            
+            var product = await _repo.GetByIdAsync(id);
            if (product == null) {
                return NotFound();
            }
-           
            return Ok(product);
         }
 
