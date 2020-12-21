@@ -3,23 +3,18 @@ using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Infrastructure
+namespace Infrastructure.Data
 {
     public class ChristmasDbContext : DbContext
-    {    
-        public ChristmasDbContext(){}
-        public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options)
-            : base(options)
-        {
+    {
+        public ChristmasDbContext() {
         }
-        
+
+        public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options) : base(options) { }
+
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set;}
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            
-        }
+        public DbSet<ProductType> ProductTypes { get; set; }
+
     }
         
 }

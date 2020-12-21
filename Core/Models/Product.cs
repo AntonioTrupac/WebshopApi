@@ -6,26 +6,15 @@ using Infrastructure;
 
 namespace Core.Models
 {
-    [Table("product")]
     public class Product : BaseEntity {
-        public Product() {
-            ProductType = new ProductType();
-        }
         
-        [Column("Name")]
         public string Name { get; set; }
-        [Column("Price")]
         public string Price { get; set; }
-        [Column("Size")]
         public string Size { get; set; }
-        [Column("Stock")]
         public int Stock { get; set; }
-        [Column("Description")]
         public string Description { get; set; }
-        [Column("Product_Type_Id")]
-        public int Product_Type_Id { get; set; }
-        [ForeignKey("Product_Type_Id")]
-        public virtual ProductType ProductType { get; set; }
+        public  ProductType ProductType { get; set; }
+        public int ProductType_Id { get; set; }
         
 
     }
