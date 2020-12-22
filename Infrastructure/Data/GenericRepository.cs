@@ -20,5 +20,20 @@ namespace Infrastructure.Data {
         public async Task<IReadOnlyList<T>> GetAll() {
             return await _context.Set<T>().ToListAsync();
         }
+
+        public async Task AddEntity(T entity) {
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
+        
+        public async Task<int> RemoveEntity(T entity) {
+            _context.Set<T>().Remove(entity);
+            return await _context.SaveChangesAsync();
+        }
+        
+        public async Task SaveAsync() 
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

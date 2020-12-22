@@ -23,36 +23,48 @@ namespace WebShop.Controllers
         public ProductController(IProductRepository repo, ILogger<ProductController> logger) {
             _repo = repo;
             _logger = logger;
-            
         }
         
         //get all
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() {
             var products = await _repo.GetAll();
-            
+
             if (products == null) {
-                
                 return NotFound();
             }
+
             return Ok(products);
         }
-        
+
         //get by id
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductsById(int id) {
             _logger.Log(LogLevel.Information, "{id}" + " " + id);
-            
+
             var product = await _repo.GetByIdAsync(id);
-           if (product == null) {
-               return NotFound();
-           }
-           return Ok(product);
+            if (product == null) {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
 
         /*[HttpPost]
-        public async Task<IActionResult<Product>> CreateProduct(Product product) {
-            
+        public async Task<ActionResult<Product>> CreateProduct(Product product) {
+            _repo.AddEntity();
         }*/
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id) {
+            var product = await _repo.GetByIdAsync(id);
+            if (product == null) {
+                return NotFound();
+            }
+
+            await _repo.RemoveEntity(product);
+            await _repo.SaveAsync();
+            return product;
+        }
     }
 }

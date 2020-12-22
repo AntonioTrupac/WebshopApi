@@ -7,5 +7,8 @@ namespace Core.Interfaces {
         
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> GetAll();
+        Task AddEntity(T entity);
+        Task<int> RemoveEntity(T entity);
+        Task SaveAsync();
     }
 }
