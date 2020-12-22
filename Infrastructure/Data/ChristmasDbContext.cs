@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Data
 {
-    public class ChristmasDbContext : DbContext
-    {
-        public ChristmasDbContext() {
-        }
+	public class ChristmasDbContext : DbContext
+	{
+		public ChristmasDbContext()
+		{
+		}
 
-        public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options) : base(options) { }
+		public ChristmasDbContext(DbContextOptions<ChristmasDbContext> options) : base(options)
+		{
+		}
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
-
-    }
-        
+		public DbSet<Product> Products { get; set; }
+		public DbSet<ProductType> ProductTypes { get; set; }
+	}
 }
-

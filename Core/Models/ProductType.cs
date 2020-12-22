@@ -6,8 +6,8 @@ using Core.Models;
 
 namespace Infrastructure
 {
-    public class ProductType :BaseEntity
-    {
-        public string Name { get; set; }
-    }
+	public class ProductType : BaseEntity
+	{
+		public string Name { get; set; }
+	}
 }
